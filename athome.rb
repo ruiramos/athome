@@ -46,7 +46,7 @@ get '/find/?' do
   content_type :json
 
   settings.mongo_db['athome'].aggregate([
-    {"$match" => {bid: params[:bid]}}
+    {"$match" => {bid: params[:bid]}},
     {"$sort" => {"date" => - 1}},
     {"$group" => {_id: {uid: "$uid"}, date: {"$first" => "$date"}, type: {"$first" => "$type"}, username: {"$first" => "$username"}, bid: {"$first" => "$bid"}}},
   ]).to_a.to_json
